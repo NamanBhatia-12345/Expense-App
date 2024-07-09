@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">User List</h2>
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+  <table *ngIf="!loading && users.length > 0" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Sr.No</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user.fullName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm me-2" (click)="showUserDetails(user.userId)">View</button>
+          <button class="btn btn-danger btn-sm me-2" (click)="deleteUserDetails(user.userId)">Delete</button>
+          <button class="btn btn-warning btn-sm" (click)="editUserDetails(user.userId)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!loading && users.length === 0" class="alert alert-info text-center">
+    No users found.
+  </div>
+</div>

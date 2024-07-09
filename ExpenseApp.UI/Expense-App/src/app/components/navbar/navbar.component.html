@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <h2 class="navbar-brand m-1" routerLink="/">Expense App</h2>
+  <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active" *ngIf="loginService.isAdmin()">
+        <a class="nav-link text-white font-weight-bold" routerLink="/admin-dashboard">Users</a>
+      </li>
+      <li class="nav-item active" *ngIf="loginService.isAdmin()">
+        <a class="nav-link text-white font-weight-bold" routerLink="/all-expenses">Expenses</a>
+      </li>
+      <li class="nav-item active" *ngIf="loginService.isUser()">
+        <a class="nav-link text-white font-weight-bold" routerLink="/user-dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item active" *ngIf="loginService.isUser()">
+        <a class="nav-link text-white font-weight-bold" routerLink="/create-group">Create Group</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item" *ngIf="!loginService.isLoggedIn()">
+        <a class="m-1 btn btn-warning text-dark" routerLink="login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="loginService.isLoggedIn()">
+        <a class="m-1 btn btn-warning text-dark" (click)="onLogoutClick()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

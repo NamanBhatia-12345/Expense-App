@@ -1,0 +1,49 @@
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+      <h2 class="text-center mb-3">Create Group</h2>
+      <form #groupForm="ngForm" (ngSubmit)="onCreateGroup()" novalidate>
+        <!-- Group Name Field -->
+        <div class="mb-3">
+          <label for="groupName" class="form-label">Group Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="groupName"
+            name="groupName"
+            required
+            pattern="[A-Za-z ]+"
+            [(ngModel)]="createGroup.name"
+            #groupName="ngModel"
+          >
+          <div *ngIf="groupName.invalid && (groupName.dirty || groupName.touched)" class="invalid-feedback d-block">
+            <div *ngIf="groupName.errors?.['required']">Group Name is required.</div>
+            <div *ngIf="groupName.errors?.['pattern']">Group Name should only contain alphabets and spaces.</div>
+          </div>
+        </div>
+  
+        <!-- Description Field -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="3"
+            required
+            [(ngModel)]="createGroup.description"
+            #description="ngModel"
+          ></textarea>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="invalid-feedback d-block">
+            <div *ngIf="description.errors?.['required']">Description is required.</div>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="groupForm.invalid">Create Group</button>
+      </form>
+      <div class="text-danger text-center mt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+  

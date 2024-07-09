@@ -1,0 +1,43 @@
+
+<a routerLink="/all-expenses" class="btn btn-info m-2">Back</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div *ngIf="loading" class="text-center">
+        <div class="loader"></div>
+      </div>
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-dark text-white text-center">
+            <h2>Expense Details</h2>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped mt-3" *ngIf="!loading">
+              <tbody>
+                <tr>
+                  <th scope="row">Expense ID</th>
+                  <td>{{ expense?.id }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Description</th>
+                  <td>{{ expense?.description }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Amount</th>
+                  <td>{{ expense?.amount | currency: 'INR'}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Date</th>
+                  <td>{{ expense?.date | date: 'shortDate' }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Paid By User</th>
+                    <td>{{ expense?.paidUserBy }}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

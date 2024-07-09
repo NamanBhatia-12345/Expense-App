@@ -1,0 +1,40 @@
+<a routerLink="/admin-dashboard" class="btn btn-info m-2">Back</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div *ngIf="loading" class="text-center">
+        <div class="loader"></div>
+      </div>
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-dark text-white text-center">
+            <h2>User Details</h2>
+          </div>
+          <div class="card-body" *ngIf="!loading">
+           
+            <h2 class="text-center mb-4">{{ user?.fullName }}</h2>
+            <table class="table table-striped mt-3">
+              <tbody>
+                <tr>
+                  <th scope="row">User ID</th>
+                  <td>{{ user?.userId }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Username</th>
+                  <td>{{ user?.userName }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td>{{ user?.email }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone Number</th>
+                  <td>{{ user?.phoneNumber }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

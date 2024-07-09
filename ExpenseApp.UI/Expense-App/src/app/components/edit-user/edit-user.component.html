@@ -1,0 +1,73 @@
+<div class="container mt-2">
+    <h2 class="text-center mb-4">Update User</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card p-4 shadow">
+          <form #updateUserForm="ngForm" (ngSubmit)="updateUser(updateUserForm)" novalidate>
+            <!-- Full Name Field -->
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="fullName"
+                name="fullName"
+                required
+                minlength="3"
+                [(ngModel)]="editUser.fullName"
+                #fullName="ngModel"
+              >
+              <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="invalid-feedback d-block">
+                <div *ngIf="fullName.errors?.['required']">Full Name is required.</div>
+                <div *ngIf="fullName.errors?.['minlength']">Full Name must be at least 3 characters long.</div>
+              </div>
+            </div>
+  
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+                email
+                [(ngModel)]="editUser.email"
+                #email="ngModel"
+              >
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback d-block">
+                <div *ngIf="email.errors?.['required']">Email is required.</div>
+                <div *ngIf="email.errors?.['email']">Invalid email address.</div>
+              </div>
+            </div>
+  
+            <!-- Phone Number Field -->
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phoneNumber"
+                name="phoneNumber"
+                required
+                pattern="^\d{10}$"
+                [(ngModel)]="editUser.phoneNumber"
+                #phoneNumber="ngModel"
+              >
+              <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="invalid-feedback d-block">
+                <div *ngIf="phoneNumber.errors?.['required']">Phone Number is required.</div>
+                <div *ngIf="phoneNumber.errors?.['pattern']">Invalid phone number format.</div>
+              </div>
+            </div>
+  
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary me-2" [disabled]="updateUserForm.invalid">Update</button>
+                <button type="button" class="btn btn-secondary" routerLink="/admin-dashboard">Back</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

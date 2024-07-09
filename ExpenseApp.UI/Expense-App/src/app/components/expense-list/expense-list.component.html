@@ -1,0 +1,41 @@
+<div class="container my-3">
+    <div class="text-center mb-2">
+      <h2>Expenses</h2>
+      <div *ngIf="loading" class="text-center">
+        <div class="loader"></div>
+      </div>
+    </div>
+    <div class="card shadow">
+      <div class="card-body">
+        <table *ngIf="!loading && expenses.length > 0" class="table table-striped table-bordered text-center">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Sr.No</th>
+              <th scope="col">Description</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Paid By</th>
+              <th scope="col">Date</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of expenses; let i = index" [ngClass]="{'table-success': expense.isSettled, 'table-warning': !expense.isSettled}">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ expense.description }}</td>
+              <td>{{ expense.amount | currency: 'INR'}}</td>
+              <td>{{ expense.paidUserBy }}</td>
+              <td>{{ expense.date | date: 'shortDate' }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm me-2" (click)="showExpenseDetails(expense.id)">View</button>
+                <button class="btn btn-secondary btn-sm me-2" (click)="updateExpenseDetails(expense)">Update</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!loading && expenses.length === 0" class="text-center text-muted">
+          No expenses found.
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,48 @@
+<div class="container my-2">
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+    <div class="text-center mb-2">
+      <h2>Group Details</h2>
+    </div>
+    <div class="card shadow" *ngIf="!loading">
+      <div class="card-body">
+        <div class="mb-3">
+          <strong>Description:</strong> {{ group?.description }}
+        </div>
+        <div class="mb-3">
+          <strong>Members:</strong>
+          <div *ngIf="group?.members.length > 0 && !loading; else noMembers">
+            <ul class="list-group">
+              <li *ngFor="let member of group?.members" class="list-group-item">
+                <strong>Name:</strong> {{ member?.fullName }}<br>
+                <strong>Email:</strong> {{ member?.email }}
+              </li>
+            </ul>
+          </div>
+          <ng-template #noMembers>
+            <div class="text-muted">No members found.</div>
+          </ng-template>
+        </div>
+        <div class="mb-3">
+          <strong>Expenses:</strong>
+          <div *ngIf="group?.expenses.length > 0 && !loading; else noExpenses">
+            <ul class="list-group">
+              <li *ngFor="let expense of group?.expenses" class="list-group-item">
+                <strong>Description:</strong> {{ expense?.description }}<br>
+                <strong>Amount:</strong> {{ expense.amount | currency: 'INR' }}
+              </li>
+            </ul>
+          </div>
+          <ng-template #noExpenses>
+            <div class="text-muted">No expenses found.</div>
+          </ng-template>
+        </div>
+        <div class="text-center" *ngIf="loginService.isUser()">
+          <button class="btn btn-primary me-2" (click)="createExpense(group?.id)">Create Expense</button>
+          <button class="btn btn-danger" (click)="deleteGroup(group?.id)">Delete Group</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

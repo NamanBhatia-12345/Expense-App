@@ -1,0 +1,53 @@
+<div class="container mt-4">
+
+  <h2 class="text-center mt-1">Expenses</h2>
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+  
+  <!-- Check if there are no expenses -->
+  <div *ngIf="(!expenses || expenses.length === 0) && !loading" class="alert alert-info text-center">
+    No expenses found.
+  </div>
+
+  <!-- Display the table if there are expenses -->
+  <div *ngIf="!loading && expenses && expenses.length > 0">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark text-center">
+        <tr>
+          <th scope="col">Sr.No</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Date</th>
+          <th scope="col">Paid By</th>
+          <th scope="col">Split Members</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenses; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ expense.description }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.date | date: 'shortDate' }}</td>
+          <td>{{ expense.paidUserBy }}</td>
+          <td>
+            <ul *ngIf="expense.splits.length > 0; else noSplitsMessage">
+              <li *ngFor="let split of expense.splits">
+                {{ split.fullName }}: {{ split.balance | currency : 'INR'}}
+              </li>
+            </ul>
+            <ng-template #noSplitsMessage>
+             <p class="text-center">No Members found</p>
+            </ng-template>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm" [disabled]="expense.isSettled" (click)="onSettleExpense(expense.id)">
+              Settle
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+      <h2 class="text-center mb-3">Login</h2>
+      <form #loginForm="ngForm" (ngSubmit)="onLoginClick()" novalidate>
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+          email
+          [(ngModel)]="loginData.email"
+          #email="ngModel"
+        >
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback d-block">
+          <div *ngIf="email.errors?.['required']">Email is required.</div>
+          <div *ngIf="email.errors?.['email']">Invalid email address.</div>
+        </div>
+        </div>
+        
+        <!-- Password Field  -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          required
+          minlength="6"
+          [(ngModel)]="loginData.password"
+          #password="ngModel"
+        >
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback d-block">
+          <div *ngIf="password.errors?.['required']">Password is required.</div>
+          <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</div>
+        </div>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
+      </form>
+      <div class="text-danger text-center mt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+  
